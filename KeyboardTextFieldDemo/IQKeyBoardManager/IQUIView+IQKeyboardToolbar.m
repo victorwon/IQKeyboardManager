@@ -157,7 +157,9 @@ NSString const *IQ_shouldHideTitleKey = @"IQ_shouldHideTitle";
     [items addObject:nilButton];
     
     //  Create a done button to show on keyboard to resign it. Adding a selector to resign it.
-    UIBarButtonItem *doneButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:target action:action];
+//    UIBarButtonItem *doneButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:target action:action];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"IQKeyboardManager.bundle/IQButtonBarHidehideKeyboard"] style:UIBarButtonItemStylePlain target:target action:action];
+
     [items addObject:doneButton];
     
     //  Adding button to toolBar.
@@ -299,7 +301,9 @@ NSString const *IQ_shouldHideTitleKey = @"IQ_shouldHideTitle";
     [items addObject:nilButton];
     
     //  Create a done button to show on keyboard to resign it. Adding a selector to resign it.
-    UIBarButtonItem *doneButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:target action:doneAction];
+//    UIBarButtonItem *doneButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:target action:doneAction];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"IQKeyboardManager.bundle/IQButtonBarHidehideKeyboard"] style:UIBarButtonItemStylePlain target:target action:doneAction];
+
     [items addObject:doneButton];
     
     //  Adding button to toolBar.
@@ -333,7 +337,9 @@ NSString const *IQ_shouldHideTitleKey = @"IQ_shouldHideTitle";
 	NSMutableArray *items = [[NSMutableArray alloc] init];
 	
 	//  Create a done button to show on keyboard to resign it. Adding a selector to resign it.
-    UIBarButtonItem *doneButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:target action:doneAction];
+//    UIBarButtonItem *doneButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:target action:doneAction];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"IQKeyboardManager.bundle/IQButtonBarHidehideKeyboard"] style:UIBarButtonItemStylePlain target:target action:doneAction];
+
 	
 	if (IQ_IS_IOS7_OR_GREATER)
 	{
