@@ -35,17 +35,20 @@ IQ_LoadCategory(IQUIViewHierarchy)
 
 @implementation UIView (IQ_UIView_Hierarchy)
 
-- (id) traverseResponderChainForUIViewController {
-    id nextResponder = [self nextResponder];
-    if ([nextResponder isKindOfClass:[UIViewController class]]) {
-        return nextResponder;
-    } else if ([nextResponder isKindOfClass:[UIView class]]) {
-        return [nextResponder traverseResponderChainForUIViewController];
-    } else {
-        return nil;
-    }
-}
+//Special textFields,textViews,scrollViews
+Class UISearchBarTextFieldClass;
+Class UIAlertSheetTextFieldClass;
+Class UITableViewCellScrollViewClass;
 
+
++(void)initialize
+{
+    [super initialize];
+
+    UISearchBarTextFieldClass       = NSClassFromString(@"UISearchBarTextField");
+    UIAlertSheetTextFieldClass      = NSClassFromString(@"UIAlertSheetTextField");
+    UITableViewCellScrollViewClass  = NSClassFromString(@"UITableViewCellScrollView");
+}
 
 -(UIViewController*)viewController
 {
@@ -85,7 +88,7 @@ IQ_LoadCategory(IQUIViewHierarchy)
     
     while (superview)
     {
-        if ([superview isKindOfClass:[UIScrollView class]])
+        if ([superview isKindOfClass:[UIScrollView class]] && ([superview isKindOfClass:UITableViewCellScrollViewClass] == NO))
         {
             return (UIScrollView*)superview;
         }
@@ -104,7 +107,7 @@ IQ_LoadCategory(IQUIViewHierarchy)
     NSMutableArray *tempTextFields = [[NSMutableArray alloc] init];
     
     for (UITextField *textField in siblings)
-        if ([textField canBecomeFirstResponder] /*&& ![textField isInsideAlertView]*/  && ![textField isInsideSearchBar])
+        if ([textField canBecomeFirstResponder] && ![textField isAlertViewTextField]  && ![textField isSearchBarTextField])
             [tempTextFields addObject:textField];
     
     return tempTextFields;
@@ -140,37 +143,15 @@ IQ_LoadCategory(IQUIViewHierarchy)
     return textFields;
 }
 
--(BOOL)isInsideSearchBar
+-(BOOL)isSearchBarTextField
 {
-    UIView *superview = self;
-    
-    while (superview)
-    {
-        if ([superview isKindOfClass:[UISearchBar class]])
-        {
-            return YES;
-        }
-        else    superview = superview.superview;
-    }
-    
-    return NO;
+    return [self isKindOfClass:UISearchBarTextFieldClass];
 }
 
-//-(BOOL)isInsideAlertView
-//{
-//    UIView *superview = self.superview;
-//    
-//    while (superview)
-//    {
-//        if ([superview isKindOfClass:[UIAlertView class]])
-//        {
-//            return YES;
-//        }
-//        else    superview = superview.superview;
-//    }
-//    
-//    return NO;
-//}
+-(BOOL)isAlertViewTextField
+{
+    return [self isKindOfClass:UIAlertSheetTextFieldClass];
+}
 
 @end
 
