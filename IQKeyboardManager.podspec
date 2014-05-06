@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "IQKeyboardManager"
-  s.version      = "3.0.4a"
+  s.version      = "3.0.5a"
   s.summary      = "Keyboard TextField Manager."
   s.homepage     = "https://github.com/victorwon/IQKeyboardManager"
   s.license      = 'MIT License'
